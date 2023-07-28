@@ -1,13 +1,13 @@
-const Comment = require("../models/commentModel");
-const Post = require("../models/postModel");
-const User = require("../models/userModel");
-const createError = require("http-errors");
-const {
+import Comment from "../models/commentModel.js";
+import Post from "../models/postModel.js";
+import User from "../models/userModel.js";
+import createError from "http-errors";
+import {
   createCommentNotification,
   removeCommentNotification,
-} = require("./notificationController");
+} from "./notificationController.js";
 
-const createComment = async (req, res, next) => {
+export const createComment = async (req, res, next) => {
   try {
     const { content, post, commentParent, isReply } = req.body;
     const userId = req.user.userId;
@@ -57,7 +57,7 @@ const createComment = async (req, res, next) => {
   }
 };
 
-const removeComment = async (req, res, next) => {
+export const removeComment = async (req, res, next) => {
   try {
     const { commentId } = req.params;
     const userId = req.user.userId;
@@ -91,4 +91,4 @@ const removeComment = async (req, res, next) => {
   }
 };
 
-module.exports = { createComment, removeComment };
+// module.exports = { createComment, removeComment };

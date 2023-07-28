@@ -5,7 +5,7 @@ import Main from "../components/main/Main";
 import TopSub from "../components/subs/TopSub";
 import UnAuthorized from "../components/pageErrors/UnAuthorized";
 
-const Home = () => {
+const Home = ({openCreate, setOpenCreate}) => {
   const [backToTop, setBackToTop] = useState(false);
   const { currentUser, setCurrentUser, errorPage } = useContext(AuthContext);
   const [showTopSub, setShowTopSub] = useState(false);
@@ -30,8 +30,6 @@ const Home = () => {
       }, 5000);
     });
   }, [currentUser]);
-
-  const [openCreate, setOpenCreate] = useState(false);
 
   // unauthorized page
   useEffect(() => {

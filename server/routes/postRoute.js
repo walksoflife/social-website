@@ -1,14 +1,14 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const {
+import {
   createLike,
   removePost,
   createPost,
   getPostById,
   getAllPosts,
   createBookmark,
-} = require("../controllers/postController");
-const fileUpload = require("../middlewares/fileUpload");
+} from "../controllers/postController.js";
+import {fileUpload} from "../middlewares/fileUpload.js";
 
 router.get("/", getAllPosts);
 router.get("/:postId", getPostById);
@@ -17,4 +17,4 @@ router.delete("/:postId", removePost);
 router.post("/like", createLike);
 router.post("/bookmark", createBookmark);
 
-module.exports = router;
+export default router;

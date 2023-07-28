@@ -13,7 +13,7 @@ import Loading from "../components/loadings/Loading";
 import Footer from "../components/footer/Footer";
 import NotFound from "../components/pageErrors/NotFound";
 
-const Profile = () => {
+const Profile = ({ openCreate, setOpenCreate }) => {
   const isUsername = useLocation().pathname?.split("/")[1];
   const { currentUser, setCurrentUser } = useContext(AuthContext);
 
@@ -30,7 +30,7 @@ const Profile = () => {
   if (error) return <NotFound />;
   return (
     <div className="profile">
-      <Sidebar />
+      <Sidebar openCreate={openCreate} setOpenCreate={setOpenCreate} />
       <div className="profile-container">
         {isLoading ? (
           <Loading />

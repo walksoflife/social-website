@@ -13,7 +13,7 @@ const getUser = (userId) => {
   return onlineUsers.find((user) => user.userId === userId);
 };
 
-const socketHandler = (io) => {
+export const socketHandler = (io) => {
   io.on("connection", (socket) => {
     console.log(`User ${socket.id} connected to socket.io`);
     // set up
@@ -58,4 +58,4 @@ const socketHandler = (io) => {
   });
 };
 
-module.exports = { socketHandler };
+// module.exports = { socketHandler };

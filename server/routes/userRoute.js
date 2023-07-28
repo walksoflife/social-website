@@ -1,6 +1,6 @@
-const express = require("express");
+import express from "express";
 const router = express.Router();
-const {
+import {
   getUserByUsername,
   updateUser,
   followUser,
@@ -10,8 +10,8 @@ const {
   getUsersFristLogin,
   flUser,
   unFlUser,
-} = require("../controllers/userController");
-const fileUpload = require("../middlewares/fileUpload");
+} from "../controllers/userController.js";
+import {fileUpload} from "../middlewares/fileUpload.js";
 
 router.get("/first-login", getUsersFristLogin);
 router.get("/suggestions", suggestionUser);
@@ -23,4 +23,4 @@ router.post("/follow", followUser);
 router.post("/follow/fl", flUser);
 router.post("/follow/unfl", unFlUser);
 
-module.exports = router;
+export default router;

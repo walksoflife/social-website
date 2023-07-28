@@ -8,13 +8,17 @@ import { ChatContext } from "../context/ChatContext";
 import { handleOpenOptions } from "../services/fetch";
 import NewChat from "../components/chats/NewChat";
 
-const Chat = () => {
+const Chat = ({ openCreate, setOpenCreate }) => {
   const { openChatDetails, isChatting } = useContext(ChatContext);
   const [openNewchat, setOpenNewchat] = useState(false);
 
   return (
     <div className="chat">
-      <Sidebar type="message" />
+      <Sidebar
+        type="message"
+        openCreate={openCreate}
+        setOpenCreate={setOpenCreate}
+      />
       <div className="chat-container">
         <GroupChat />
         {isChatting ? (

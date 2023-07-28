@@ -1,13 +1,14 @@
-const uploadToCloudinary = require("../helpers/uploader");
-const User = require("../models/userModel");
-const createError = require("http-errors");
-const {
+// import uploadToCloudinary from "../helpers/uploader.js";
+import User from "../models/userModel.js";
+import createError from "http-errors";
+import {
   removeFollowNotification,
   createFollowNotification,
-} = require("./notificationController");
+} from "./notificationController.js";
+import { uploadToCloudinary } from "../helpers/uploader.js";
 
 // ---------------- GET USER BY ID ----------------
-const getUserByUsername = async (req, res, next) => {
+export const getUserByUsername = async (req, res, next) => {
   try {
     const { username } = req.params;
     const user = await User.find({ username })
@@ -27,7 +28,7 @@ const getUserByUsername = async (req, res, next) => {
 };
 
 // ---------------- UPDATE USER ----------------
-const updateUser = async (req, res, next) => {
+export const updateUser = async (req, res, next) => {
   try {
     const { name, username, email, bio, location } = req.body;
 
@@ -68,7 +69,7 @@ const updateUser = async (req, res, next) => {
 };
 
 // ---------------- FOLLOW USER MAIN ----------------
-const followUser = async (req, res, next) => {
+export const followUser = async (req, res, next) => {
   try {
     let message;
     const { friendId } = req.body;
@@ -104,7 +105,7 @@ const followUser = async (req, res, next) => {
 };
 
 // ---------------- FOLLOW USER ----------------
-const flUser = async (req, res, next) => {
+export const flUser = async (req, res, next) => {
   try {
     const { friendId } = req.body;
     const userId = req.user.userId;
@@ -133,7 +134,7 @@ const flUser = async (req, res, next) => {
 };
 
 // ---------------- UNFOLLOW USER ----------------
-const unFlUser = async (req, res, next) => {
+export const unFlUser = async (req, res, next) => {
   try {
     const { friendId } = req.body;
     const userId = req.user.userId;
@@ -162,7 +163,7 @@ const unFlUser = async (req, res, next) => {
 };
 
 // ---------------- SEARCH USER ----------------
-const searchUser = async (req, res, next) => {
+export const searchUser = async (req, res, next) => {
   try {
     const keyword = req.query.keyword;
 
@@ -182,7 +183,7 @@ const searchUser = async (req, res, next) => {
 };
 
 // ---------------- GET LIST FRIENDS ----------------
-const getListFriend = async (req, res, next) => {
+export const getListFriend = async (req, res, next) => {
   try {
     const users = await User.findById({ _id: req.user.userId }).select([
       "followings",
@@ -198,7 +199,7 @@ const getListFriend = async (req, res, next) => {
 };
 
 // ---------------- GET SUGESSTION USER ----------------
-const suggestionUser = async (req, res, next) => {
+export const suggestionUser = async (req, res, next) => {
   try {
     let users;
     const user = await User.findById(req.user.userId);
@@ -221,7 +222,7 @@ const suggestionUser = async (req, res, next) => {
 };
 
 // ---------------- GET SUGESSTION USER ----------------
-const getUsersFristLogin = async (req, res, next) => {
+export const getUsersFristLogin = async (req, res, next) => {
   try {
     let results;
     const user = await User.findById(req.user.userId);
@@ -243,14 +244,14 @@ const getUsersFristLogin = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  followUser,
-  updateUser,
-  getUserByUsername,
-  searchUser,
-  getListFriend,
-  suggestionUser,
-  getUsersFristLogin,
-  flUser,
-  unFlUser,
-};
+// module.exports = {
+//   followUser,
+//   updateUser,
+//   getUserByUsername,
+//   searchUser,
+//   getListFriend,
+//   suggestionUser,
+//   getUsersFristLogin,
+//   flUser,
+//   unFlUser,
+// };

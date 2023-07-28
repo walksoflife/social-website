@@ -1,11 +1,11 @@
-const Chat = require("../models/chatModel");
-const User = require("../models/userModel");
-const { Types } = require("mongoose");
-const createError = require("http-errors");
-const Message = require("../models/messageModel");
+import Chat from "../models/chatModel.js";
+import User from "../models/userModel.js";
+import { Types } from "mongoose";
+import createError from "http-errors";
+import Message from "../models/messageModel.js";
 
 // ---------------- CREATE A SINGLE CHAT ----------------
-const createChat = async (req, res, next) => {
+export const createChat = async (req, res, next) => {
   try {
     if (!req.params.members) throw createError.BadRequest();
 
@@ -112,7 +112,7 @@ const createChat = async (req, res, next) => {
 };
 
 // ---------------- GET ALL CHAT CONVERSATIONS ----------------
-const getAllChat = async (req, res, next) => {
+export const getAllChat = async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
@@ -137,7 +137,7 @@ const getAllChat = async (req, res, next) => {
 };
 
 // ---------------- REMOVE CHAT CONVERSATIONS ----------------
-const deleteChat = async (req, res, next) => {
+export const deleteChat = async (req, res, next) => {
   try {
     const { chatId } = req.params;
 
@@ -155,7 +155,7 @@ const deleteChat = async (req, res, next) => {
 };
 
 // ---------------- ADD MEMBER TO CHAT CONVERSATIONS ----------------
-const addToGroup = async (req, res, next) => {
+export const addToGroup = async (req, res, next) => {
   try {
     const { chatId } = req.params;
 
@@ -189,7 +189,7 @@ const addToGroup = async (req, res, next) => {
 };
 
 // ---------------- REMOVE MEMBER TO CHAT CONVERSATIONS ----------------
-const removeOutGroup = async (req, res, next) => {
+export const removeOutGroup = async (req, res, next) => {
   try {
     const { chatId } = req.params;
     if (!req.body.userRemoved) throw createError.BadRequest();
@@ -225,7 +225,7 @@ const removeOutGroup = async (req, res, next) => {
 };
 
 // ---------------- CHANGE NAME CHAT CONVERSATIONS ----------------
-const changeGroupName = async (req, res, next) => {
+export const changeGroupName = async (req, res, next) => {
   try {
     const { chatId } = req.params;
 
@@ -241,11 +241,11 @@ const changeGroupName = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  createChat,
-  getAllChat,
-  deleteChat,
-  addToGroup,
-  removeOutGroup,
-  changeGroupName,
-};
+// module.exports = {
+//   createChat,
+//   getAllChat,
+//   deleteChat,
+//   addToGroup,
+//   removeOutGroup,
+//   changeGroupName,
+// };

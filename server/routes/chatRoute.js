@@ -1,12 +1,12 @@
-const express = require("express");
-const {
+import express from "express";
+import {
   createChat,
   getAllChat,
   deleteChat,
   addToGroup,
   changeGroupName,
   removeOutGroup,
-} = require("../controllers/chatController");
+} from "../controllers/chatController.js";
 const router = express.Router();
 
 router.get("/all", getAllChat);
@@ -16,4 +16,4 @@ router.patch("/name/:chatId", changeGroupName);
 router.patch("/:chatId", addToGroup);
 router.put("/:chatId", removeOutGroup);
 
-module.exports = router;
+export default router;

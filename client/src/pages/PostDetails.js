@@ -17,7 +17,7 @@ import Footer from "../components/footer/Footer";
 import Loading from "../components/loadings/Loading";
 import NotFound from "../components/pageErrors/NotFound";
 
-const PostDetails = () => {
+const PostDetails = ({ openCreate, setOpenCreate }) => {
   const postId = useLocation().pathname?.split("/")[2];
   const { isLoading, data, error } = GetPostDetails("posts", postId);
   const [isReplying, setIsReplying] = useState(false);
@@ -27,7 +27,7 @@ const PostDetails = () => {
   if (error) return <NotFound />;
   return (
     <div className="pd">
-      <Sidebar />
+      <Sidebar openCreate={openCreate} setOpenCreate={setOpenCreate} />
       <div className="pd-container">
         {isLoading ? (
           <Loading />

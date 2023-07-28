@@ -1,22 +1,22 @@
-require("./configs/db");
-const http = require("http");
-const express = require("express");
-const cors = require("cors");
-const helmet = require("helmet");
-const compression = require("compression");
-const morgan = require("morgan");
-const session = require("express-session");
-const passport = require("passport");
-const createError = require("http-errors");
-const routes = require("./routes");
-const { Server } = require("socket.io");
-const {
+import { connectDB } from "./configs/db.js";
+import http from "http";
+import express from "express";
+import cors from "cors";
+import helmet from "helmet";
+import compression from "compression";
+import morgan from "morgan";
+import session from "express-session";
+import passport from "passport";
+import createError from "http-errors";
+import {routes} from "./routes/index.js";
+import { Server } from "socket.io";
+import {
   PORT,
   SESSION_OPTIONS,
   COR_OPTIONS,
   SOCKET_OPTIONS,
-} = require("./configs");
-const { socketHandler } = require("./socket");
+} from "./configs/index.js";
+import { socketHandler } from "./socket.js";
 
 const port = PORT || 5000;
 const app = express();
@@ -33,7 +33,7 @@ app.use(cors(COR_OPTIONS));
 // app.use(express.static(root));
 // app.get("*", (req, res) => {
 //   res.sendFile("index.html", { root });
-// }); 
+// });
 
 // passport set up
 app.use(passport.initialize());
@@ -58,6 +58,7 @@ app.use((err, req, res, next) => {
 });
 
 httpServer.listen(port, () => console.log("Server is running on port " + port));
+connectDB();
 
 // socket io
 const io = new Server(httpServer, SOCKET_OPTIONS);

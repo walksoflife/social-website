@@ -1,8 +1,8 @@
-const Notification = require("../models/notificationModel");
-const createError = require("http-errors");
+import Notification from "../models/notificationModel.js";
+import createError from "http-errors";
 
 // ---------------- GET ALL NOTIFICATIONS READ ----------------
-const getAllNotifications = async (req, res, next) => {
+export const getAllNotifications = async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
@@ -26,7 +26,7 @@ const getAllNotifications = async (req, res, next) => {
 };
 
 // ---------------- SET NOTIFICATION READ ----------------
-const unReadNotification = async (req, res, next) => {
+export const unReadNotification = async (req, res, next) => {
   try {
     const userId = req.user.userId;
 
@@ -51,7 +51,7 @@ const unReadNotification = async (req, res, next) => {
 };
 
 // ---------------- CREATE NOTIFICATION ----------------
-const createLikeNotification = async (sender, receiver, post) => {
+export const createLikeNotification = async (sender, receiver, post) => {
   try {
     const notification = await Notification.create({
       sender,
@@ -65,7 +65,7 @@ const createLikeNotification = async (sender, receiver, post) => {
   }
 };
 
-const removeLikeNotification = async (sender, receiver, post) => {
+export const removeLikeNotification = async (sender, receiver, post) => {
   try {
     await Notification.findOneAndDelete({
       sender,
@@ -78,7 +78,7 @@ const removeLikeNotification = async (sender, receiver, post) => {
   }
 };
 
-const createCommentNotification = async (sender, receiver, post, comment) => {
+export const createCommentNotification = async (sender, receiver, post, comment) => {
   try {
     const notification = await Notification.create({
       sender,
@@ -93,7 +93,7 @@ const createCommentNotification = async (sender, receiver, post, comment) => {
   }
 };
 
-const removeCommentNotification = async (sender, receiver, post, comment) => {
+export const removeCommentNotification = async (sender, receiver, post, comment) => {
   try {
     await Notification.findOneAndDelete({
       sender,
@@ -107,7 +107,7 @@ const removeCommentNotification = async (sender, receiver, post, comment) => {
   }
 };
 
-const createFollowNotification = async (sender, receiver) => {
+export const createFollowNotification = async (sender, receiver) => {
   try {
     const notification = await Notification.create({
       sender,
@@ -120,7 +120,7 @@ const createFollowNotification = async (sender, receiver) => {
   }
 };
 
-const removeFollowNotification = async (sender, receiver) => {
+export const removeFollowNotification = async (sender, receiver) => {
   try {
     await Notification.findOneAndDelete({
       sender,
@@ -132,13 +132,13 @@ const removeFollowNotification = async (sender, receiver) => {
   }
 };
 
-module.exports = {
-  getAllNotifications,
-  unReadNotification,
-  createLikeNotification,
-  removeLikeNotification,
-  createCommentNotification,
-  removeCommentNotification,
-  createFollowNotification,
-  removeFollowNotification,
-};
+// module.exports = {
+//   getAllNotifications,
+//   unReadNotification,
+//   createLikeNotification,
+//   removeLikeNotification,
+//   createCommentNotification,
+//   removeCommentNotification,
+//   createFollowNotification,
+//   removeFollowNotification,
+// };

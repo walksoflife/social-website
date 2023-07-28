@@ -1,11 +1,11 @@
-const { loginSchema, registerSchema } = require("../auth/validation");
-const createError = require("http-errors");
-const User = require("../models/userModel");
-const { generateAccessToken } = require("../helpers/generateToken");
-const { hashPw, comparePw } = require("../helpers");
+import { loginSchema, registerSchema } from "../auth/validation.js";
+import createError from "http-errors";
+import User from "../models/userModel.js";
+import { generateAccessToken } from "../helpers/generateToken.js";
+import { hashPw, comparePw } from "../helpers/index.js";
 
 // ---------------- REGISTER ----------------
-const register = async (req, res, next) => {
+export const register = async (req, res, next) => {
   try {
     const { name, username, email, password, confirmPassword } = req.body;
 
@@ -45,7 +45,7 @@ const register = async (req, res, next) => {
 };
 
 // ---------------- LOGIN ----------------
-const login = async (req, res, next) => {
+export const login = async (req, res, next) => {
   try {
     const { email, password } = req.body;
     const { errors } = await loginSchema.validateAsync({ email, password });
@@ -75,7 +75,7 @@ const login = async (req, res, next) => {
 };
 
 // ---------------- LOGOUT ----------------
-const logout = async (req, res, next) => {
+export const logout = async (req, res, next) => {
   try {
     res.status(200).json({ message: "You have been logged out" });
   } catch (error) {
@@ -83,4 +83,4 @@ const logout = async (req, res, next) => {
   }
 };
 
-module.exports = { register, login, logout };
+// module.exports = { register, login, logout };

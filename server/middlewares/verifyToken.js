@@ -1,15 +1,17 @@
-const jwt = require("jsonwebtoken");
-const createError = require("http-errors");
-const { ACCESS_TOKEN_SECRET } = require("../configs");
+import jwt from "jsonwebtoken";
+import createError from "http-errors";
+// import { ACCESS_TOKEN_SECRET } = require("../configs");
+import dotenv from "dotenv";
+dotenv.config();
 
-const verifyAccessToken = (req, res, next) => {
+export const verifyAccessToken = (req, res, next) => {
   try {
     if (!req.headers["authorization"]) throw createError.Unauthorized();
     const authHeader = req.headers["authorization"];
     const bearerToken = authHeader.split(" ");
     const token = bearerToken[1];
 
-    jwt.verify(token, ACCESS_TOKEN_SECRET, (err, decoded) => {
+    jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) return next(createError.Unauthorized(err.message));
 
       req.user = decoded;
@@ -20,4 +22,4 @@ const verifyAccessToken = (req, res, next) => {
   }
 };
 
-module.exports = { verifyAccessToken };
+// module.exports = { verifyAccessToken };

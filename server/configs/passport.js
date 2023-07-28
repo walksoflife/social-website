@@ -1,13 +1,14 @@
-const { FACEBOOK_APP_ID, FACEBOOK_APP_SECRET } = require("./index");
-const FacebookStrategy = require("passport-facebook").Strategy;
-const passport = require("passport");
-const User = require("../models/userModel");
+import dotenv from "dotenv";
+dotenv.config();
+import FacebookStrategy from "passport-facebook";
+import passport from "passport";
+import User from "../models/userModel.js";
 
 passport.use(
-  new FacebookStrategy(
+  new FacebookStrategy.Strategy(
     {
-      clientID: FACEBOOK_APP_ID,
-      clientSecret: FACEBOOK_APP_SECRET,
+      clientID: process.env.FACEBOOK_APP_ID,
+      clientSecret: process.env.FACEBOOK_APP_SECRET,
       callbackURL: "/auth/facebook/callback",
     },
     (accessToken, refreshToken, profile, done) => {
@@ -42,6 +43,6 @@ passport.serializeUser((user, done) => {
 
 passport.deserializeUser((id, done) => {
   //   User.findById(id).then((user) => {
-  done(null, user);
+  done(null, id);
   //   });
 });

@@ -6,7 +6,7 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { useContext, lazy, Suspense } from "react";
+import { useContext, lazy, Suspense, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import { SkeletonTheme } from "react-loading-skeleton";
@@ -31,6 +31,8 @@ const App = () => {
     );
   };
 
+  const [openCreate, setOpenCreate] = useState(false);
+
   return (
     <SkeletonTheme baseColor="#dbdbdb" highlightColor="#dbdbdb" enableAnimation>
       <BrowserRouter>
@@ -40,7 +42,7 @@ const App = () => {
               path="/"
               element={
                 <Suspense>
-                  <Home />
+                  <Home openCreate={openCreate} setOpenCreate={setOpenCreate} />
                 </Suspense>
               }
             />
@@ -48,7 +50,10 @@ const App = () => {
               path="/:username"
               element={
                 <Suspense>
-                  <Profile />
+                  <Profile
+                    openCreate={openCreate}
+                    setOpenCreate={setOpenCreate}
+                  />
                 </Suspense>
               }
             />
@@ -56,15 +61,18 @@ const App = () => {
               path="/posts/:postId"
               element={
                 <Suspense>
-                  <PostDetails />
+                  <PostDetails
+                    openCreate={openCreate}
+                    setOpenCreate={setOpenCreate}
+                  />
                 </Suspense>
               }
             />
             <Route
               path="/chat"
-              element={
+            element={
                 <Suspense>
-                  <Chat />
+                  <Chat openCreate={openCreate} setOpenCreate={setOpenCreate} />
                 </Suspense>
               }
             />

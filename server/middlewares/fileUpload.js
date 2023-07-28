@@ -1,4 +1,4 @@
-const multer = require("multer");
+import multer from "multer";
 
 const MIME_TYPE_MAP = {
   "image/png": "png",
@@ -6,7 +6,7 @@ const MIME_TYPE_MAP = {
   "image/jpg": "jpg",
 };
 
-const fileUpload = multer({
+export const fileUpload = multer({
   limits: 500000,
   storage: multer.memoryStorage(),
   fileFilter: (req, file, cb) => {
@@ -16,4 +16,4 @@ const fileUpload = multer({
   },
 });
 
-module.exports = fileUpload;
+// module.exports = fileUpload;

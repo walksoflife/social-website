@@ -1,15 +1,15 @@
-const uploadToCloudinary = require("../helpers/uploader");
-const Comment = require("../models/commentModel");
-const Post = require("../models/postModel");
-const User = require("../models/userModel");
-const createError = require("http-errors");
-const {
+import Comment from "../models/commentModel.js";
+import Post from "../models/postModel.js";
+import User from "../models/userModel.js";
+import createError from "http-errors";
+import {
   removeLikeNotification,
   createLikeNotification,
-} = require("./notificationController");
+} from "./notificationController.js";
+import { uploadToCloudinary } from "../helpers/uploader.js";
 
 // ---------------- GET ALL POSTS ORDER DESCENDING ----------------
-const getAllPosts = async (req, res, next) => {
+export const getAllPosts = async (req, res, next) => {
   try {
     const posts = await Post.find()
       .populate("author", ["username", "avatar", "posts", "followers"])
@@ -22,7 +22,7 @@ const getAllPosts = async (req, res, next) => {
 };
 
 // ---------------- GET SINGLE POST BY ID ----------------
-const getPostById = async (req, res, next) => {
+export const getPostById = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const post = await Post.findById(postId)
@@ -43,7 +43,7 @@ const getPostById = async (req, res, next) => {
 };
 
 // ---------------- CREATE NEW POST ----------------
-const createPost = async (req, res, next) => {
+export const createPost = async (req, res, next) => {
   try {
     const { caption } = req.body;
     const userId = req.user.userId;
@@ -80,7 +80,7 @@ const createPost = async (req, res, next) => {
 };
 
 // ---------------- REMOVE POST ----------------
-const removePost = async (req, res, next) => {
+export const removePost = async (req, res, next) => {
   try {
     const { postId } = req.params;
     const userId = req.user.userId;
@@ -104,7 +104,7 @@ const removePost = async (req, res, next) => {
 };
 
 // ---------------- LIKE / UNLIKE A POST ----------------
-const createLike = async (req, res, next) => {
+export const createLike = async (req, res, next) => {
   try {
     let message;
     const { postLiked } = req.body;
@@ -139,7 +139,7 @@ const createLike = async (req, res, next) => {
 };
 
 // ---------------- BOOKMARK / UN BOOKMARK A POST ----------------
-const createBookmark = async (req, res, next) => {
+export const createBookmark = async (req, res, next) => {
   try {
     let message;
     const { postBookmark } = req.body;
@@ -179,11 +179,11 @@ const createBookmark = async (req, res, next) => {
   }
 };
 
-module.exports = {
-  createLike,
-  removePost,
-  createPost,
-  getPostById,
-  getAllPosts,
-  createBookmark,
-};
+// module.exports = {
+//   createLike,
+//   removePost,
+//   createPost,
+//   getPostById,
+//   getAllPosts,
+//   createBookmark,
+// };

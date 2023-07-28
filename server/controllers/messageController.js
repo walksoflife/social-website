@@ -1,9 +1,9 @@
-const Message = require("../models/messageModel");
-const Chat = require("../models/chatModel");
-const createError = require("http-errors");
+import Message from "../models/messageModel.js";
+import Chat from "../models/chatModel.js";
+import createError from "http-errors";
 
 // ---------------- GET ALL MESSAGES OF ONE CONVERSATION ----------------
-const getMessagesOfChat = async (req, res, next) => {
+export const getMessagesOfChat = async (req, res, next) => {
   try {
     const { chatId } = req.params;
 
@@ -27,7 +27,7 @@ const getMessagesOfChat = async (req, res, next) => {
 };
 
 // ---------------- SEND MESSAGE ----------------
-const sendMessage = async (req, res, next) => {
+export const sendMessage = async (req, res, next) => {
   try {
     const userId = req.user.userId;
     const { chatId, content } = req.body;
@@ -65,7 +65,7 @@ const sendMessage = async (req, res, next) => {
 };
 
 // ---------------- SEND MESSAGE ----------------
-const seenMessage = async (req, res, next) => {
+export const seenMessage = async (req, res, next) => {
   try {
     const { chatId } = req.body;
 
@@ -116,4 +116,4 @@ const seenMessage = async (req, res, next) => {
   }
 };
 
-module.exports = { getMessagesOfChat, sendMessage, seenMessage };
+// module.exports = { getMessagesOfChat, sendMessage, seenMessage };
