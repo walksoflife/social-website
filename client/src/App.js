@@ -6,19 +6,25 @@ import {
   Outlet,
   Navigate,
 } from "react-router-dom";
-import { useContext, lazy, Suspense, useState } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "./context/AuthContext";
 import { ToastContainer } from "react-toastify";
 import { SkeletonTheme } from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import NotFound from "./components/pageErrors/NotFound";
+import Home from "./pages/Home";
+import Profile from "./pages/Profile";
+import PostDetails from "./pages/PostDetails";
+import Chat from "./pages/Chat";
+import Login from "./pages/Login";
+import Register from "./pages/Register";
 
-const Home = lazy(() => import("./pages/Home"));
-const Login = lazy(() => import("./pages/Login"));
-const Register = lazy(() => import("./pages/Register"));
-const Profile = lazy(() => import("./pages/Profile"));
-const PostDetails = lazy(() => import("./pages/PostDetails"));
-const Chat = lazy(() => import("./pages/Chat"));
+// const Home = lazy(() => import("./pages/Home"));
+// const Login = lazy(() => import("./pages/Login"));
+// const Register = lazy(() => import("./pages/Register"));
+// const Profile = lazy(() => import("./pages/Profile"));
+// const PostDetails = lazy(() => import("./pages/PostDetails"));
+// const Chat = lazy(() => import("./pages/Chat"));
 
 const App = () => {
   const { currentUser } = useContext(AuthContext);
@@ -41,64 +47,64 @@ const App = () => {
             <Route
               path="/"
               element={
-                <Suspense>
-                  <Home openCreate={openCreate} setOpenCreate={setOpenCreate} />
-                </Suspense>
+                // <Suspense>
+                <Home openCreate={openCreate} setOpenCreate={setOpenCreate} />
+                // </Suspense>
               }
             />
             <Route
               path="/:username"
               element={
-                <Suspense>
-                  <Profile
-                    openCreate={openCreate}
-                    setOpenCreate={setOpenCreate}
-                  />
-                </Suspense>
+                // <Suspense>
+                <Profile
+                  openCreate={openCreate}
+                  setOpenCreate={setOpenCreate}
+                />
+                // </Suspense>
               }
             />
             <Route
               path="/posts/:postId"
               element={
-                <Suspense>
-                  <PostDetails
-                    openCreate={openCreate}
-                    setOpenCreate={setOpenCreate}
-                  />
-                </Suspense>
+                // <Suspense>
+                <PostDetails
+                  openCreate={openCreate}
+                  setOpenCreate={setOpenCreate}
+                />
+                // </Suspense>
               }
             />
             <Route
               path="/chat"
-            element={
-                <Suspense>
-                  <Chat openCreate={openCreate} setOpenCreate={setOpenCreate} />
-                </Suspense>
+              element={
+                // <Suspense>
+                <Chat openCreate={openCreate} setOpenCreate={setOpenCreate} />
+                // </Suspense>
               }
             />
           </Route>
           <Route
             path="/accounts/login"
             element={
-              <Suspense>
-                <Login />
-              </Suspense>
+              // <Suspense>
+              <Login />
+              // </Suspense>
             }
           />
           <Route
             path="/accounts/sign-up"
             element={
-              <Suspense>
-                <Register />
-              </Suspense>
+              // <Suspense>
+              <Register />
+              // </Suspense>
             }
           />
           <Route
             path="*"
             element={
-              <Suspense>
-                <NotFound />
-              </Suspense>
+              // <Suspense>
+              <NotFound />
+              // </Suspense>
             }
           />
         </Routes>
